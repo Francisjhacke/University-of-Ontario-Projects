@@ -1,2 +1,2 @@
 # University-of-Ontario-Projects
-A collection of some of my projects from Durham College in the Computer Programmer Analyst program. 
+A collection of some of the projects I completed during my degree in Computer Science at the University of Ontario Institute of Technology.
