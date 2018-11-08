@@ -25,7 +25,7 @@ def fractional_knapsack(capacity, values, weights):
             break
     return total, percentages
  
-# Example inputs taken from lecture slides (Lecture 06, slide 28)
+# Sample inputs taken from lecture slides (Lecture 06, slide 28)
 capacity = 11
 values = [14, 9, 7.5, 1]
 weights = [7, 6, 5, 1]
