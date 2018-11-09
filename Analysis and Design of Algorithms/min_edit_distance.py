@@ -13,13 +13,14 @@ def min_edit_distance(first_string, second_string):
             elif first_string[i - 1] == second_string[j - 1]:
                 D[i][j] = D[i - 1][j - 1]
             else:
-                D[i][j] = 1 + min(D[i][j - 1],      # Insert
-                                  D[i - 1][j],      # Remove
-                                  D[i - 1][j - 1])  # Replace
+                D[i][j] = 1 + min(D[i][j - 1],      # insertion
+                                  D[i - 1][j],      # deletion
+                                  D[i - 1][j - 1])  # substitution 
     return D[m][n]
 
-# Sample inputs taken from Stanford NLP group on Minimum Edit Distance (MED)
-first_string = "intention"
-second_string = "execution"
+# Sample test inputs from Assignment requirements
+first_strings = ["spoof", "podiatrist", "blaming"]
+second_strings = ["stool", "pediatrician", "conning"]
 
-print(min_edit_distance(first_string, second_string))
+for i in range(len(first_strings)):
+    print(min_edit_distance(first_strings[i], second_strings[i]))
