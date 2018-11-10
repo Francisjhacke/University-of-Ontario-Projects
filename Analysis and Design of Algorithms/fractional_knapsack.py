@@ -1,12 +1,4 @@
 def fractional_knapsack(capacity, values, weights):
-    """Given a number of items with weight and value, 
-    select a percentage (0.0-1.0) for each item(s) to 
-    include in your knapsack such that the weight capacity 
-    (W) of the knapsack is not exceeded, and the total 
-    value (V, the sum of the value of all included items) 
-    is maximal.
-    """
-
     index = list(range(len(values)))
     ratio = [v/w for v, w in zip(values, weights)]   # get value to weight ratios
     index.sort(key=lambda i: ratio[i], reverse=True) # sort value to weight ratio in decreasing order
