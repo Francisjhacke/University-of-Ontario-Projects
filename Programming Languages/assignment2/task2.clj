@@ -37,13 +37,14 @@
 (let [output (distinct (list-2015 "data.csv"))]
     (doseq [item output
         :when (not (= item false))]
-            (apply println item))
-)
+            (apply println item)))
 
 (println " ")
 
 (let [instructors (get-instructors-2016 "data.csv")]
     (doseq [instructor (most-frequent-n 10 instructors)]
-        (apply println instructor)
+        (doseq [val instructor]
+            (print (format "%-30s" val)))
+        (println " ")
     )
 )
