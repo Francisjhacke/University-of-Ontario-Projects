@@ -1,3 +1,5 @@
+#Authors: Francis Hackenberger & Andre Dallaire
+
 def fractional_knapsack(capacity, values, weights):
     index = list(range(len(values)))
     ratio = [v/w for v, w in zip(values, weights)]   # get value to weight ratios

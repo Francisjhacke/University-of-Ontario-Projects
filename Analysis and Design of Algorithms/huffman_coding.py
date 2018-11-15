@@ -1,3 +1,5 @@
+#Authors: Francis Hackenbergert & Andre Dallaire
+
 import heapq
 
 def huffman_coding(frequency):
@@ -16,23 +18,28 @@ def huffman_coding(frequency):
     return sorted(heapq.heappop(heap)[1:], key=lambda prefix: (len(prefix[-1]), prefix))
 
 # Test the algorithm
-string = ""
+def huffman(filename):
+    string = ""
+
+    with open(filename, 'r') as textFile:
+        string = textFile.read().replace('\n', '')
+
+    # Get frequencies of each character
+    freq = {}
+    for character in string:
+        if character in freq:
+            freq[character] += 1
+        else:
+            freq[character] = 1
+
+    prefixCodes = huffman_coding(freq)
+    print("Char".ljust(5) + "Freq".ljust(5) + "Prefix Code")
+    for prefix in prefixCodes:
+        print(prefix[0].ljust(5) + str(freq[prefix[0]]).ljust(5) + prefix[1])
+
+    print("Original length: ", len(string))
+    print("Encoded length: ", len(prefixCodes))
+
+
 fileName = input("Enter a filename: ")
-with open(fileName, 'r') as textFile:
-    string = textFile.read().replace('\n', '')
-
-# Get frequencies of each character
-freq = {}
-for character in string:
-    if character in freq:
-        freq[character] += 1
-    else:
-        freq[character] = 1
-
-prefixCodes = huffman_coding(freq)
-print("Char".ljust(5) + "Freq".ljust(5) + "Prefix Code")
-for prefix in prefixCodes:
-    print(prefix[0].ljust(5) + str(freq[prefix[0]]).ljust(5) + prefix[1])
-
-print("Original length: ", len(string))
-print("Encoded length: ", len(prefixCodes))
+huffman(fileName)

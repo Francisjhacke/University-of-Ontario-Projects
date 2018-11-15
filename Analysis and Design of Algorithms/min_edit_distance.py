@@ -1,3 +1,5 @@
+#Authors: Francis Hackenbergert & Andre Dallaire
+
 def min_edit_distance(first_string, second_string):
     m = len(first_string)
     n = len(second_string)
