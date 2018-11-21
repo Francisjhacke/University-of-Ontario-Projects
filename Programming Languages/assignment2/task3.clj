@@ -3,50 +3,42 @@
 (require '[clojure.java.io :as io]
 		 '[clojure.string :as str])
 
-(defn list-2015 [filename]
-	(let [rdr (io/reader filename)]
-	  (for [line (line-seq rdr)
-		:let [record (str/split line #";")]]
-        (and (= (re-find #"2015" (nth record 0)) "2015") (= (re-find #"CSCI" (nth record 3)) "CSCI")
-            {:code (nth record 3) :name (nth record 1)}
-        )
-	  )
-	)
-)
-
-(defn get-instructors-2016 [filename]
+(defn get-instructor-details [filename]
 	(let [rdr (io/reader filename)]
 	  (for [line (line-seq rdr)
 		:let [record (str/split line #";")]
-        :when (and (not (= (nth record 19) "TBA"))
-                (and (= (re-find #"2016" (nth record 0)) "2016") 
-                (= (re-find #"Lecture" (nth record 18)) "Lecture")))]
-        (nth record 19)
+        :when (and (not (= (nth record 19) "TBA")) (not (= (nth record 19) "Trent University")))
+        :when (= (re-find #"Lecture" (nth record 18)) "Lecture")]
+            {
+                :instructor (nth record 19) 
+                :starthour (nth record 10)
+                :startmin (nth record 11)
+                :endhour (nth record 12)
+                :endmin (nth record 13)
+                :day (nth record 14)
+                :room (nth record 15)
+                :semester (nth record 0)
+            }
 	  )
 	)
 )
 
-(defn most-frequent-n [n items]
-  (->> items
-    frequencies
-    (sort-by val)
-    reverse
-    (take n))
+(defn compare-times [details]
+    (for [first details
+          second details
+          :when (= (get first :room) (get second :room))
+          :when (not= (get first :instructor) (get second :instructor))
+          :when (= (get first :endhour) (get second :starthour))
+          :when (= (get first :endmin) (get second :startmin))
+          :when (= (get first :day) (get second :day))
+          :when (= (get first :semester) (get second :semester))]
+        {:one (get first :instructor) :two (get second :instructor)}
+    )	
 )
 
-(let [output (sort-by :code (distinct (list-2015 "2017-10-15.txt")))]
-    (doseq [item output
-        :when (not (= item false))]
-            (println (get item :code) "" (get item :name))
-    )
-)
 
-(println " ")
-
-(let [instructors (get-instructors-2016 "2017-10-15.txt")]
-    (doseq [instructor (most-frequent-n 10 instructors)]
-        (doseq [val instructor]
-            (print (format "%-30s" val)))
-        (println " ")
+(let [details (get-instructor-details "2017-10-15.txt")]
+    (let [matches (compare-times details)]
+        (print (count matches))
     )
 )
