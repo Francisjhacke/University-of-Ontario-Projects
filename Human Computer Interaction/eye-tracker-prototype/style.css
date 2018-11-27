@@ -12,12 +12,25 @@
 
 .nav-link {
     color: #fff!important;
+    font-size: 20px;
 }
 
 .center {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.record-button-toggle {
+    position:absolute;
+    left: 815px;
+    bottom: 40px;
+}
+
+.alert-primary {
+    background-color: #fff;
+    border: 2px solid #2699FB;
+    color: #2699FB;
 }
 
 .settings {
