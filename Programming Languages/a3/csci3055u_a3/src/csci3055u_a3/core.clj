@@ -31,7 +31,7 @@
 (defn main [fileName]
   (let [grades (parse-string (slurp fileName) true)]
     (println (get grades :title))
-    (println "Range:" (format "%.2f" (Math/floor (get-min grades))) "to" (format "%.2f" (Math/floor (get-max grades))))
+    (println "Range:" (format "%.2f" (get-min grades)) "to" (format "%.2f" (get-max grades)))
     (println "Average:" (format "%.2f" (get-avg grades)))
     (print "Best student: ")
     (apply print (get-best-student grades))
